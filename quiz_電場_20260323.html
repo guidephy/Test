@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>桃園觀音高中物理科素養題 - 電場</title>
+
+  <!-- KaTeX 公式渲染 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {
+      delimiters: [
+        {left:'$$',right:'$$',display:true},
+        {left:'$',right:'$',display:false}
+      ]
+    });"></script>
+
+  <style>
+    :root {
+      --primary: #1a5276;
+      --accent: #2e86c1;
+      --bg: #f4f6f9;
+      --card: #ffffff;
+      --text: #2c3e50;
+      --border: #d5d8dc;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.8;
+    }
+    .container { max-width: 860px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+    .header {
+      background: var(--primary);
+      color: white;
+      padding: 2rem;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    .header h1 { font-size: 1.6rem; margin-bottom: 0.5rem; }
+    .header .meta { font-size: 0.9rem; opacity: 0.85; }
+    .fill-row {
+      display: flex; gap: 2rem; margin-top: 1rem;
+      justify-content: center; flex-wrap: wrap;
+    }
+    .fill-row span {
+      border-bottom: 1px solid rgba(255,255,255,0.6);
+      padding-bottom: 2px; min-width: 120px;
+    }
+
+    .article-card {
+      background: var(--card);
+      border-left: 4px solid var(--accent);
+      border-radius: 8px;
+      padding: 1.5rem 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .article-card h2 {
+      color: var(--accent);
+      font-size: 1.15rem;
+      margin-bottom: 1rem;
+    }
+    .article-card p { margin-bottom: 0.8rem; }
+
+    .figure-block {
+      text-align: center;
+      margin: 1.2rem 0;
+    }
+    .figure-block svg { max-width: 100%; border-radius: 6px; }
+    .figure-caption { font-size: 0.85rem; color: #7f8c8d; margin-top: 0.4rem; }
+
+    .section-title {
+      background: var(--accent);
+      color: white;
+      padding: 0.6rem 1.2rem;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: bold;
+      margin: 2rem 0 1rem;
+    }
+    .question-block {
+      background: var(--card);
+      border-radius: 8px;
+      padding: 1.2rem 1.5rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+      border: 1px solid var(--border);
+    }
+    .question-block .q-num {
+      font-weight: bold;
+      color: var(--accent);
+      margin-right: 0.4rem;
+    }
+    .options { margin-top: 0.6rem; padding-left: 1rem; }
+    .options li {
+      list-style: none;
+      padding: 0.3rem 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+    .options input[type="radio"] { margin-top: 0.3rem; flex-shrink: 0; }
+    .blank-line {
+      border-bottom: 1px solid var(--border);
+      margin: 0.6rem 0;
+      height: 1.8rem;
+    }
+    .calc-space {
+      border: 1px dashed var(--border);
+      min-height: 100px;
+      border-radius: 6px;
+      margin-top: 0.6rem;
+      padding: 0.5rem;
+      background: #fafafa;
+    }
+    .answer-section {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+    .answer-toggle {
+      background: none;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      padding: 0.3rem 0.8rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.85rem;
+    }
+    .answer-toggle:hover { background: var(--accent); color: white; }
+    .answer-content {
+      display: none;
+      margin-top: 0.8rem;
+      padding: 0.8rem;
+      background: #eaf4fb;
+      border-radius: 6px;
+      font-size: 0.9rem;
+    }
+    .bloom-tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      padding: 0.1rem 0.5rem;
+      background: var(--primary);
+      color: white;
+      border-radius: 10px;
+      margin-left: 0.5rem;
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 0.8rem;
+      color: #aaa;
+      margin-top: 3rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+
+    @media print {
+      .answer-section { display: none; }
+      .answer-toggle { display: none; }
+      body { background: white; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- 抬頭 -->
+  <div class="header">
+    <h1>桃園觀音高中物理科素養題　單元：電場</h1>
+    <div class="meta">出題日期：2026/03/23 ／ 文章主題：靜電集塵與電場的科技應用</div>
+    <div class="fill-row">
+      <span>班級：＿＿＿＿＿</span>
+      <span>座號：＿＿＿＿＿</span>
+      <span>姓名：＿＿＿＿＿</span>
+    </div>
+  </div>
+
+  <!-- 素養文章 -->
+  <div class="article-card">
+    <h2>📖 閱讀文章：讓空氣更清新的「電場衛士」——靜電集塵技術</h2>
+
+    <p>隨著台灣都市化程度提升，室內空氣品質（IAQ）受到越來越多民眾重視。根據環境部統計，台灣每年因 PM2.5 細懸浮微粒引發的呼吸道與心血管疾病案例不在少數。在眾多空氣淨化技術中，「靜電集塵」（Electrostatic Precipitation，ESP）利用電場對帶電粒子施加庫侖力，已成為工業煙囪減排與家用空氣清淨機的核心技術之一。</p>
+
+    <p>靜電集塵的基本原理分為兩個階段：<strong>電暈放電充電</strong>與<strong>靜電吸附</strong>。在充電區，高壓電極（通常為鎢絲線）施加數千伏特的直流高壓，使附近空氣游離，產生大量自由電子。空氣中漂浮的粉塵顆粒與這些自由電子碰撞後，便帶上負電荷。帶電的粉塵顆粒在集塵區進入均勻電場，根據庫侖定律，受到指向集塵板（正極板）的靜電力作用，最終吸附在集塵板上，達到淨化效果。</p>
+
+    <div class="figure-block">
+      <svg viewBox="0 0 680 260" xmlns="http://www.w3.org/2000/svg" style="max-width:620px;background:#fff;border-radius:8px;border:1px solid #d5d8dc;">
+        <!-- 背景分區 -->
+        <rect x="30" y="30" width="180" height="200" rx="6" fill="#fef9e7" stroke="#f39c12" stroke-width="1.5"/>
+        <rect x="240" y="30" width="380" height="200" rx="6" fill="#eaf4fb" stroke="#2e86c1" stroke-width="1.5"/>
+
+        <!-- 充電區標題 -->
+        <text x="120" y="55" text-anchor="middle" font-size="13" font-weight="bold" fill="#e67e22">充電區（電暈放電）</text>
+
+        <!-- 高壓電極線 -->
+        <line x1="120" y1="70" x2="120" y2="210" stroke="#e74c3c" stroke-width="3"/>
+        <circle cx="120" cy="70" r="5" fill="#e74c3c"/>
+        <circle cx="120" cy="140" r="5" fill="#e74c3c"/>
+        <circle cx="120" cy="210" r="5" fill="#e74c3c"/>
+        <text x="145" y="145" font-size="11" fill="#e74c3c">高壓電極</text>
+        <text x="145" y="158" font-size="11" fill="#e74c3c">（負極）</text>
+
+        <!-- 電暈放電射線 -->
+        <line x1="120" y1="140" x2="80" y2="120" stroke="#f39c12" stroke-width="1" stroke-dasharray="4,3"/>
+        <line x1="120" y1="140" x2="75" y2="145" stroke="#f39c12" stroke-width="1" stroke-dasharray="4,3"/>
+        <line x1="120" y1="140" x2="80" y2="165" stroke="#f39c12" stroke-width="1" stroke-dasharray="4,3"/>
+        <text x="40" y="120" font-size="10" fill="#e67e22">e⁻</text>
+        <text x="38" y="147" font-size="10" fill="#e67e22">e⁻</text>
+        <text x="40" y="170" font-size="10" fill="#e67e22">e⁻</text>
+
+        <!-- 集塵區標題 -->
+        <text x="430" y="55" text-anchor="middle" font-size="13" font-weight="bold" fill="#2980b9">集塵區（靜電吸附）</text>
+
+        <!-- 正極板 -->
+        <rect x="260" y="65" width="12" height="150" rx="3" fill="#2e86c1"/>
+        <text x="256" y="225" text-anchor="middle" font-size="11" fill="#2e86c1">＋</text>
+        <rect x="590" y="65" width="12" height="150" rx="3" fill="#2e86c1"/>
+        <text x="596" y="225" text-anchor="middle" font-size="11" fill="#2e86c1">＋</text>
+
+        <!-- 均勻電場線（向右） -->
+        <defs>
+          <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L8,3 z" fill="#85c1e9"/>
+          </marker>
+        </defs>
+        <line x1="290" y1="100" x2="570" y2="100" stroke="#85c1e9" stroke-width="1.2" marker-end="url(#arr)"/>
+        <line x1="290" y1="140" x2="570" y2="140" stroke="#85c1e9" stroke-width="1.2" marker-end="url(#arr)"/>
+        <line x1="290" y1="180" x2="570" y2="180" stroke="#85c1e9" stroke-width="1.2" marker-end="url(#arr)"/>
+        <text x="415" y="118" text-anchor="middle" font-size="11" fill="#5d6d7e">均勻電場 E</text>
+
+        <!-- 帶負電粉塵移動 -->
+        <circle cx="380" cy="140" r="8" fill="#7f8c8d" opacity="0.8"/>
+        <text x="380" y="144" text-anchor="middle" font-size="9" fill="white">−</text>
+        <line x1="380" y1="140" x2="320" y2="140" stroke="#e74c3c" stroke-width="2" marker-end="url(#arr)"/>
+        <text x="350" y="132" font-size="10" fill="#e74c3c">F庫</text>
+
+        <!-- 吸附在正極板的粉塵 -->
+        <circle cx="270" cy="95" r="6" fill="#7f8c8d" opacity="0.9"/>
+        <circle cx="270" cy="125" r="5" fill="#95a5a6" opacity="0.9"/>
+        <circle cx="270" cy="155" r="7" fill="#7f8c8d" opacity="0.9"/>
+        <circle cx="270" cy="185" r="5" fill="#95a5a6" opacity="0.9"/>
+
+        <!-- 空氣流向箭頭 -->
+        <line x1="195" y1="140" x2="238" y2="140" stroke="#27ae60" stroke-width="2" marker-end="url(#arr)" stroke-dasharray="none"/>
+        <text x="215" y="132" text-anchor="middle" font-size="10" fill="#27ae60">空氣流</text>
+
+        <!-- 標籤 -->
+        <text x="430" y="248" text-anchor="middle" font-size="11" fill="#5d6d7e">帶負電粉塵受庫侖力向正極板偏轉吸附</text>
+      </svg>
+      <div class="figure-caption">圖1：靜電集塵原理示意圖。充電區高壓電極使粉塵帶負電，集塵區均勻電場驅使帶電粉塵吸附於正極板。</div>
+    </div>
+
+    <p>工業靜電集塵器的集塵極板間距約 $20 \sim 30\ \text{cm}$，施加電壓可達 $30{,}000\ \text{V}$ 以上，使極板間形成強電場。依據電場公式 $E = \frac{V}{d}$，在 $d = 0.25\ \text{m}$、$V = 30{,}000\ \text{V}$ 的條件下，電場強度可達 $1.2 \times 10^5\ \text{V/m}$。如此強的電場對帶電量 $q = 3.2 \times 10^{-19}\ \text{C}$ 的粉塵微粒所施的庫侖力為：</p>
+
+    $$F = qE = 3.2 \times 10^{-19} \times 1.2 \times 10^5 \approx 3.84 \times 10^{-14}\ \text{N}$$
+
+    <p>雖然這個力看起來微小，但對於質量僅 $10^{-15}\ \text{kg}$ 的 PM2.5 微粒而言，產生的加速度可高達 $3.84 \times 10^1\ \text{m/s}^2$，約為重力加速度的 4 倍！這解釋了靜電集塵能在極短時間內有效捕捉細懸浮微粒的物理機制。</p>
+
+    <p>然而，高壓放電過程中不可避免地會產生少量臭氧（O₃）。臭氧濃度一旦超過 50 ppb，對人體呼吸道將造成刺激。如何在維持高集塵效率的同時降低臭氧生成，是目前靜電集塵技術研發的重要課題。工業界已開發出低溫等離子體及奈米催化網等技術，有效吸附分解多餘臭氧，使家用靜電集塵機的臭氧排放維持在安全範圍內。</p>
+
+    <p>電場的應用不僅止於空氣清淨。從影印機的靜電感光鼓、噴墨印表機的墨滴偏轉控制，到醫療用靜電噴霧給藥，乃至半導體製程中的靜電卡盤固定晶圓，電場在現代科技中扮演著不可或缺的角色。理解庫侖定律與電場的基本概念，正是打開這些科技大門的鑰匙。</p>
+  </div>
+
+  <!-- 選擇題 -->
+  <div class="section-title">一、選擇題（每題 5 分，共 40 分）</div>
+
+  <!-- Q1 -->
+  <div class="question-block">
+    <p><span class="q-num">1.</span>根據文章，靜電集塵中粉塵微粒帶電的主要機制是：</p>
+    <ul class="options">
+      <li><input type="radio" name="q1"> (A) 微粒與空氣摩擦產生靜電</li>
+      <li><input type="radio" name="q1"> (B) 高壓電極電暈放電產生的自由電子與微粒碰撞</li>
+      <li><input type="radio" name="q1"> (C) 微粒吸收光能後自發帶電</li>
+      <li><input type="radio" name="q1"> (D) 集塵板的磁場感應使微粒帶電</li>
+    </ul>
+    <div class="answer-section">
+      <button class="answer-toggle" onclick="toggleAnswer(this)">顯示答案</button>
+      <div class="answer-content">答案：(B)。高壓電極進行電暈放電，使附近空氣游離產生自由電子，這些電子與粉塵碰撞後使微粒帶負電。<span class="bloom-tag">Bloom: Remember</span></div>
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="question-block">
+    <p><span class="q-num">2.</span>靜電集塵器的集塵板上吸附的微粒帶負電，集塵板為正極板。下列敘述何者正確？</p>
+    <ul class="options">
+      <li><input type="radio" name="q2"> (A) 電場線由集塵板（正極）指向高壓電極（負極）</li>
+      <li><input type="radio" name="q2"> (B) 電場線由高壓電極（負極）指向集塵板（正極）</li>
+      <li><input type="radio" name="q2"> (C) 帶負電微粒受電場力方向與電場線方向相同</li>
+      <li><input type="radio" name="q2"> (D) 集塵板間電位差為零，故無法推動微粒移動</li>
+    </ul>
+    <div class="answer-section">
+      <button class="answer-toggle" onclick="toggleAnswer(this)">顯示答案</button>
+      <div class="answer-content">答案：(A)。電場線由高電位（正極，集塵板）指向低電位（負極，高壓電極）。帶負電微粒所受電場力與電場線方向相反，即指向正極板，使微粒被吸附。選項(C)錯誤，負電荷所受力與電場方向相反。<span class="bloom-tag">Bloom: Understand</span></div>
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="question-block">
+    <p><span class="q-num">3.</span>文章指出，工業集塵器極板間距 $d = 0.25\ \text{m}$，施加電壓 $V = 30{,}000\ \text{V}$，則兩板間的均勻電場強度為何？</p>
+    <ul class="options">
+      <li><input type="radio" name="q3"> (A) $7.5 \times 10^3\ \text{V/m}$</li>
+      <li><input type="radio" name="q3"> (B) $1.2 \times 10^5\ \text{V/m}$</li>
+      <li><input type="radio" name="q3"> (C) $7.5 \times 10^6\ \text{V/m}$</li>
+      <li><input type="radio" name="q3"> (D) $3.0 \times 10^4\ \text{V/m}$</li>
+    </ul>
+    <div class="answer-section">
+      <button class="answer-toggle" onclick="toggleAnswer(this)">顯示答案</button>
+      <div class="answer-content">答案：(B)。$E = \dfrac{V}{d} = \dfrac{30000}{0.25} = 1.2 \times 10^5\ \text{V/m}$<span class="bloom-tag">Bloom: Apply</span></div>
+    </div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="question-block">
+    <p><span class="q-num">4.</span>某 PM2.5 微粒帶電量為 $q = 3.2 \times 10^{-19}\ \text{C}$，在電場強度 $E = 1.2 \times 10^5\ \text{V/m}$ 的均勻電場中，所受庫侖力大小為：</p>
+    <ul class="options">
+      <li><input type="radio" name="q4"> (A) $3.84 \times 10^{-24}\ \text{N}$</li>
+      <li><input type="radio" name="q4"> (B) $3.84 \times 10^{-14}\ \text{N}$</li>
+      <li><input type="radio" name="q4"> (C) $3.75 \times 10^{-15}\ \text{N}$</li>
+      <li><input type="radio" name="q4"> (D) $1.2 \times 10^{5}\ \text{N}$</li>
+    </ul>
+    <div class="answer-section">
+      <button class="answer-toggle" onclick="toggleAnswer(this)">顯示答案</button>
+      <div class="answer-content">答案：(B)。$F = qE = 3.2 \times 10^{-19} \times 1.2 \times 10^5 = 3.84 \times 10^{-14}\ \text{N}$<span class="bloom-tag">Bloom: Apply</span></div>
+    </div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="question-block">
+    <p><span class="q-num">5.</span>文章提到，質量 $m = 10^{-15}\ \text{kg}$ 的 PM2.5 微粒受到庫侖力 $F = 3.84 \times 10^{-14}\ \text{N}$，其加速度約為重力加速度 $g = 10\ \text{m/s}^2$ 的幾倍？（忽略空氣阻力）</p>
+    <ul class="options">
+      <li><input type="radio" name="q5"> (A) 約 0.4 倍</li>
+      <li><input type="radio" name="q5"> (B) 約 1 倍</li>
+      <li><input type="radio" name="q5"> (C) 約 4 倍</li>
+      <li><input type="radio" name="q5"> (D) 約 40 倍</li>
+    </ul>
+    <div class="answer-section">
+      <button class="answer-toggle" onclick="toggleAnswer(this)">顯示答案</button>
+      <div class="answer-content">答案：(C)。$a = \dfrac{F}{m} = \dfrac{3.84 \times 10^{-14}}{10^{-15}} = 38.4\ \text{m/s}^2 \approx 3.84g \approx 4g$，約為重力加速度的 4 倍。<span class="bloom-tag">Bloom: Apply</span></div>
+    </div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="question-block">
+    <p><span class="q-num">6.</span>若將靜電集塵器的極板間距縮短為原來的一半（電壓不變），則電場強度與微粒所受庫侖力的變化為何？</p>
+    <ul class="options">
+      <li><input type="radio" name="q6"> (A) 電場強度不變，庫侖力不變</li>
+      <li><input type="radio" name="q6"> (B) 電場強度變為 2 倍，庫侖力變為 2 倍</li>
+      <li><input type="radio" name="q6"> (C) 電場強度變為 2 倍，庫侖力不變</li>
+      <li><input type="radio" name="q6"> (D) 電場強度變為 1/2 倍，庫侖力變為 1/2 倍</li>
+    </ul>
+    <div class="answer-section">
+      <button class="answer-toggle" onclick="toggleAnswer(this)">顯示答案</button>
+      <div class="answer-content">答案：(B)。$E = V/d$，$d$ 減半則 $E$ 加倍；$F = qE$，$q$ 不變，$E$ 加倍，所以 $F$ 也加倍。<span class="bloom-tag">Bloom: Analyze</span></div>
+    </div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="question-block">
+    <p><span class="q-num">7.</span>兩帶電平行板間距為 $d$，電壓為 $V$，一帶電量 $q$、質量 $m$ 的微粒由靜止開始僅受電場力作用（方向平行於電場）。若微粒從中間位置出發，到達極板的時間為 $t$。若改為電壓加倍（$2V$），其他條件不變，到達極板的時間變為原來的幾倍？</p>
+    <ul class="options">
+      <li><input type="radio" name="q7"> (A) $\sqrt{2}$ 倍</li>
+      <li><input type="radio" name="q7"> (B) $\dfrac{1}{\sqrt{2}}$ 倍</li>
+      <li><input type="radio" name="q7"> (C) 2 倍</li>
+      <li><input type="radio" name="q7"> (D) $\dfrac{1}{2}$ 倍</li>
+    </ul>
+    <div class="answer-section">
+      <button class="answer-toggle" onclick="toggleAnswer(this)">顯示答案</button>
+      <div class="answer-content">答案：(B)。位移 $s = \dfrac{d}{2}$（固定），$a = \dfrac{qE}{m} = \dfrac{qV}{md}$。由 $s = \dfrac{1}{2}at^2$ 得 $t = \sqrt{\dfrac{2s}{a}} \propto \dfrac{1}{\sqrt{V}}$。電壓加倍，$t$ 變為 $\dfrac{1}{\sqrt{2}}$ 倍。<span class="bloom-tag">Bloom: Analyze</span></div>
+    </div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="question-block">
+    <p><span class="q-num">8.</span>文章提到靜電集塵產生臭氧的問題。從物理與環境角度分析，下列哪項改進措施「不能」有效降低臭氧對人體的影響？</p>
+    <ul class="options">
+      <li><input type="radio" name="q8"> (A) 在機器出風口加裝奈米催化網以分解臭氧</li>
+      <li><input type="radio" name="q8"> (B) 降低高壓電極的放電電壓以減少電暈強度</li>
+      <li><input type="radio" name="q8"> (C) 增加活性碳濾網以吸附臭氧分子</li>
+      <li><input type="radio" name="q8"> (D) 增大極板間距使電場更強，提高集塵效率</li>
+    </ul>
+    <div class="answer-section">
+      <button class="answer-toggle" onclick="toggleAnswer(this)">顯示答案</button>
+      <div class="answer-content">答案：(D)。增大極板間距在電壓不變下會使電場 $E = V/d$ 減弱（非增強），且不能降低臭氧產生。選項(A)(B)(C)都有助於降低臭氧危害。<span class="bloom-tag">Bloom: Evaluate</span></div>
+    </div>
+  </div>
+
+  <!-- 填充題 -->
+  <div class="section-title">二、填充題（每格 5 分，共 20 分）</div>
+
+  <!-- Q9 -->
+  <div class="question-block">
+    <p><span class="q-num">9.</span>兩平行導體板相距 $d = 4\ \text{cm} = 0.04\ \text{m}$，兩板間電壓為 $V = 800\ \text{V}$。</p>
+    <p style="margin-top:0.5rem;">(a) 兩板間均勻電場強度 $E =$ ＿＿＿＿＿ $\text{V/m}$</p>
+    <div class="blank-line"></div>
+    <p style="margin-top:0.5rem;">(b) 一電荷量 $q = 2 \times 10^{-8}\ \text{C}$ 的帶正電微粒在此電場中所受電場力 $F =$ ＿＿＿＿＿ $\text{N}$</p>
+    <div class="blank-line"></div>
+    <div class="answer-section">
+      <button class="answer-toggle" onclick="toggleAnswer(this)">顯示答案</button>
+      <div class="answer-content">
+        (a) $E = \dfrac{V}{d} = \dfrac{800}{0.04} = 2 \times 10^4\ \text{V/m}$<br>
+        (b) $F = qE = 2 \times 10^{-8} \times 2 \times 10^4 = 4 \times 10^{-4}\ \text{N}$
+        <span class="bloom-tag">Bloom: Apply</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q10 -->
+  <div class="question-block">
+    <p><span class="q-num">10.</span>在均勻電場中，電場強度為 $E = 5000\ \text{V/m}$，一帶電量 $q = -4 \times 10^{-9}\ \text{C}$ 的微粒所受電場力大小為 ＿＿＿＿＿ $\text{N}$，方向與電場方向＿＿＿＿＿（相同／相反）。</p>
+    <div class="blank-line"></div>
+    <div class="answer-section">
+      <button class="answer-toggle" onclick="toggleAnswer(this)">顯示答案</button>
+      <div class="answer-content">
+        大小：$F = |q|E = 4 \times 10^{-9} \times 5000 = 2 \times 10^{-5}\ \text{N}$<br>
+        方向：<strong>相反</strong>（負電荷受力方向與電場方向相反）
+        <span class="bloom-tag">Bloom: Understand</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 計算題 -->
+  <div class="section-title">三、計算題（共 40 分）</div>
+
+  <!-- Q11 -->
+  <div class="question-block">
+    <p><span class="q-num">11.</span>（20 分）某靜電集塵空氣清淨機的集塵板間距為 $d = 5\ \text{mm} = 5 \times 10^{-3}\ \text{m}$，施加電壓 $V = 5000\ \text{V}$。一 PM2.5 微粒的質量 $m = 5 \times 10^{-16}\ \text{kg}$，帶電量 $q = 1.6 \times 10^{-19}\ \text{C}$（負電）。假設微粒進入集塵區時，初速度沿水平方向（平行極板），大小為 $v_0 = 0.1\ \text{m/s}$，且從兩板正中央進入。</p>
+    <p style="margin-top:0.5rem;">（重力加速度 $g = 10\ \text{m/s}^2$，忽略重力與空氣阻力）</p>
+    <p style="margin-top:0.8rem;">(a) 求集塵板間的電場強度 $E$。</p>
+    <p>(b) 求微粒在垂直板面方向（電場方向）的加速度大小 $a$。</p>
+    <p>(c) 微粒從中央位置到被吸附在集塵板上，所經過的垂直距離為 $d/2$，求到達集塵板所需時間 $t$。</p>
+    <p>(d) 在時間 $t$ 內，微粒水平移動的距離為多少？即集塵區的最短有效長度為何？</p>
+    <div class="calc-space">（計算區）</div>
+    <div class="answer-section">
+      <button class="answer-toggle" onclick="toggleAnswer(this)">顯示答案</button>
+      <div class="answer-content">
+        (a) $E = \dfrac{V}{d} = \dfrac{5000}{5 \times 10^{-3}} = 1 \times 10^6\ \text{V/m}$<br><br>
+        (b) $F = qE = 1.6 \times 10^{-19} \times 10^6 = 1.6 \times 10^{-13}\ \text{N}$<br>
+        $a = \dfrac{F}{m} = \dfrac{1.6 \times 10^{-13}}{5 \times 10^{-16}} = 320\ \text{m/s}^2$<br><br>
+        (c) 垂直位移 $s = \dfrac{d}{2} = 2.5 \times 10^{-3}\ \text{m}$<br>
+        由 $s = \dfrac{1}{2}at^2$：$t = \sqrt{\dfrac{2s}{a}} = \sqrt{\dfrac{2 \times 2.5 \times 10^{-3}}{320}} = \sqrt{1.5625 \times 10^{-5}} \approx 3.95 \times 10^{-3}\ \text{s}$<br><br>
+        (d) 水平距離 $x = v_0 \cdot t = 0.1 \times 3.95 \times 10^{-3} \approx 3.95 \times 10^{-4}\ \text{m} \approx 0.4\ \text{mm}$
+        <span class="bloom-tag">Bloom: Apply / Analyze</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q12 -->
+  <div class="question-block">
+    <p><span class="q-num">12.</span>（20 分）如圖所示，兩平行金屬板水平放置（上板接正極、下板接負極），板間距 $d = 10\ \text{cm}$，電壓 $V = 200\ \text{V}$。一質量 $m = 2 \times 10^{-3}\ \text{kg}$、帶正電荷 $q$ 的小物體恰好靜止懸浮在兩板之間。（$g = 10\ \text{m/s}^2$）</p>
+    <p style="margin-top:0.8rem;">(a) 分析懸浮時電場力與重力的關係，求帶電量 $q$。</p>
+    <p>(b) 若將電壓增加至 $V' = 300\ \text{V}$（其他條件不變），求物體的加速度大小與方向。</p>
+    <div class="calc-space">（計算區）</div>
+    <div class="answer-section">
+      <button class="answer-toggle" onclick="toggleAnswer(this)">顯示答案</button>
+      <div class="answer-content">
+        (a) 懸浮條件：電場力向上 = 重力向下，$qE = mg$<br>
+        $E = \dfrac{V}{d} = \dfrac{200}{0.1} = 2000\ \text{V/m}$（方向向下，由正極板到負極板）<br>
+        正電荷受向上電場力：$q \times 2000 = 2 \times 10^{-3} \times 10$<br>
+        $q = \dfrac{2 \times 10^{-2}}{2000} = 1 \times 10^{-5}\ \text{C}$<br><br>
+        (b) $E' = \dfrac{V'}{d} = \dfrac{300}{0.1} = 3000\ \text{V/m}$<br>
+        電場力 $F' = qE' = 10^{-5} \times 3000 = 3 \times 10^{-2}\ \text{N}$（向上）<br>
+        重力 $mg = 2 \times 10^{-2}\ \text{N}$（向下）<br>
+        合力 $= F' - mg = 3 \times 10^{-2} - 2 \times 10^{-2} = 1 \times 10^{-2}\ \text{N}$（向上）<br>
+        $a = \dfrac{F_{合}}{m} = \dfrac{10^{-2}}{2 \times 10^{-3}} = 5\ \text{m/s}^2$，方向<strong>向上</strong>。
+        <span class="bloom-tag">Bloom: Apply / Analyze</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">桃園觀音高中物理科 ／ 本題目由 AI 輔助出題，教師審閱後使用</div>
+</div>
+
+<script>
+function toggleAnswer(btn) {
+  const content = btn.nextElementSibling;
+  if (content.style.display === 'block') {
+    content.style.display = 'none';
+    btn.textContent = '顯示答案';
+  } else {
+    content.style.display = 'block';
+    btn.textContent = '隱藏答案';
+  }
+}
+</script>
+</body>
+</html>
