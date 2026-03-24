@@ -99,7 +99,39 @@
 const UNIT_EMOJI={'力學':'⚙️','電場':'⚡','電磁學':'🧲','光學':'🔭','波動':'〰️','熱學':'🌡️','靜力學':'🏗️','量子':'🔬'};
 let activeUnit='';
 // <!-- QUIZ_DATA_START -->
-const QUIZ_LIST=[{"unit":"電場","title":"靜電集塵與電場的科技應用","date":"20260323","url":"https://guidephy.github.io/Test/quizzes/電場/電場_20260323.html","bloom_levels":["Remember","Understand","Apply","Analyze","Evaluate"],"question_count":12,"has_simulation":false,"has_animation":true}];
+const QUIZ_LIST = [
+  {
+    "unit": "電場",
+    "title": "靜電集塵與電場的科技應用",
+    "date": "20260323",
+    "url": "https://guidephy.github.io/Test/quizzes/電場/電場_20260323.html",
+    "bloom_levels": [
+      "Remember",
+      "Understand",
+      "Apply",
+      "Analyze",
+      "Evaluate"
+    ],
+    "question_count": 12,
+    "has_simulation": false,
+    "has_animation": true
+  },
+  {
+    "unit_id": "matter",
+    "title": "宇宙最強的膠水——強力與夸克膠子漿",
+    "date": "20260324",
+    "url": "https://guidephy.github.io/Test/quizzes/matter/matter_20260324.html",
+    "bloom_levels": [
+      "Remember",
+      "Understand",
+      "Apply",
+      "Analyze"
+    ],
+    "question_count": 12,
+    "has_simulation": true,
+    "has_animation": true
+  }
+];
 // <!-- QUIZ_DATA_END -->
 function init(){
   document.getElementById('stat-total').textContent=QUIZ_LIST.length;
