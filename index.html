@@ -1,166 +1,158 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>桃園觀音高中 ✦ 物理科線上題庫</title>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>桃園觀音高中物理科 - 線上題庫</title>
   <style>
-    :root{--navy:#0d1b3e;--blue:#1a4fa8;--sky:#2e86c1;--teal:#17a589;--gold:#d4ac0d;--light:#eaf2fb;--bg:#f0f4f8;--card:#ffffff;--text:#1c2b3a;--muted:#6b7c93;--border:#d0dce8;--radius:14px;--shadow:0 4px 20px rgba(13,27,62,.10);}
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-    html{scroll-behavior:smooth;}
-    body{font-family:'Noto Sans TC','Microsoft JhengHei','PingFang TC',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;min-height:100vh;}
-    .hero{background:linear-gradient(135deg,var(--navy) 0%,var(--blue) 60%,var(--sky) 100%);color:#fff;padding:3.5rem 2rem 5rem;text-align:center;position:relative;overflow:hidden;}
-    .hero::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");pointer-events:none;}
-    .hero-icon{font-size:3.5rem;margin-bottom:.8rem;filter:drop-shadow(0 2px 12px rgba(0,0,0,.3));animation:floatIcon 3s ease-in-out infinite;}
-    @keyframes floatIcon{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
-    .hero h1{font-size:clamp(1.6rem,4vw,2.4rem);font-weight:800;letter-spacing:.04em;text-shadow:0 2px 12px rgba(0,0,0,.25);margin-bottom:.4rem;}
-    .hero p{font-size:1rem;opacity:.85;margin-bottom:1.5rem;}
-    .hero-stats{display:inline-flex;gap:2rem;background:rgba(255,255,255,.12);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.2);border-radius:50px;padding:.7rem 2rem;font-size:.9rem;}
-    .hero-stats span{display:flex;align-items:center;gap:.4rem;}
-    .hero-stats strong{font-size:1.2rem;font-weight:800;}
-    .wave-divider{display:block;width:100%;margin-top:-1px;fill:var(--bg);}
-    .container{max-width:1100px;margin:0 auto;padding:0 1.5rem 4rem;}
-    .filter-bar{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.2rem 1.5rem;margin-bottom:2rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;position:sticky;top:.5rem;z-index:100;}
-    .search-wrap{flex:1;min-width:200px;position:relative;}
-    .search-wrap::before{content:'🔍';position:absolute;left:.9rem;top:50%;transform:translateY(-50%);font-size:.9rem;pointer-events:none;}
-    .search-wrap input{width:100%;padding:.6rem 1rem .6rem 2.4rem;border:1.5px solid var(--border);border-radius:8px;font-size:.95rem;font-family:inherit;background:var(--bg);transition:border-color .2s,box-shadow .2s;}
-    .search-wrap input:focus{outline:none;border-color:var(--sky);box-shadow:0 0 0 3px rgba(46,134,193,.15);}
-    .chip-group{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;}
-    .chip{padding:.35rem 1rem;border-radius:50px;border:1.5px solid var(--border);background:var(--bg);color:var(--muted);font-size:.85rem;cursor:pointer;transition:all .18s;user-select:none;}
-    .chip:hover{border-color:var(--sky);color:var(--sky);}
-    .chip.active{background:var(--sky);border-color:var(--sky);color:#fff;font-weight:600;}
-    .result-count{font-size:.85rem;color:var(--muted);white-space:nowrap;margin-left:auto;}
-    .sort-select{padding:.4rem .8rem;border:1.5px solid var(--border);border-radius:8px;font-size:.85rem;font-family:inherit;background:var(--bg);color:var(--text);cursor:pointer;}
-    .quiz-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.4rem;}
-    .quiz-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--border);text-decoration:none;color:inherit;display:flex;flex-direction:column;overflow:hidden;transition:transform .2s,box-shadow .2s;position:relative;}
-    .quiz-card:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(13,27,62,.15);}
-    .card-stripe{height:5px;background:linear-gradient(90deg,var(--sky),var(--teal));}
-    .quiz-card[data-unit="力學"] .card-stripe{background:linear-gradient(90deg,#e74c3c,#e67e22);}
-    .quiz-card[data-unit="電場"] .card-stripe,.quiz-card[data-unit="電磁學"] .card-stripe{background:linear-gradient(90deg,#2e86c1,#1abc9c);}
-    .quiz-card[data-unit="光學"] .card-stripe{background:linear-gradient(90deg,#9b59b6,#e91e8c);}
-    .quiz-card[data-unit="波動"] .card-stripe{background:linear-gradient(90deg,#27ae60,#2ecc71);}
-    .quiz-card[data-unit="熱學"] .card-stripe{background:linear-gradient(90deg,#e67e22,#f39c12);}
-    .card-body{padding:1.2rem 1.4rem;flex:1;display:flex;flex-direction:column;gap:.5rem;}
-    .card-top{display:flex;align-items:flex-start;gap:.6rem;flex-wrap:wrap;}
-    .unit-badge{display:inline-flex;align-items:center;gap:.25rem;padding:.2rem .7rem;border-radius:50px;font-size:.75rem;font-weight:700;letter-spacing:.03em;background:var(--light);color:var(--sky);border:1px solid rgba(46,134,193,.25);white-space:nowrap;}
-    .sim-badge{display:inline-flex;align-items:center;gap:.2rem;padding:.18rem .55rem;border-radius:50px;font-size:.7rem;font-weight:700;background:#e8f8f5;color:var(--teal);border:1px solid rgba(23,165,137,.3);white-space:nowrap;}
-    .anim-badge{display:inline-flex;align-items:center;gap:.2rem;padding:.18rem .55rem;border-radius:50px;font-size:.7rem;font-weight:700;background:#fef9e7;color:#c79a00;border:1px solid rgba(212,172,13,.35);white-space:nowrap;}
-    .card-title{font-size:1rem;font-weight:700;color:var(--navy);line-height:1.4;}
-    .card-meta{display:flex;gap:1rem;font-size:.8rem;color:var(--muted);flex-wrap:wrap;}
-    .card-meta span{display:flex;align-items:center;gap:.3rem;}
-    .bloom-row{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:auto;padding-top:.5rem;}
-    .bloom-chip{font-size:.68rem;padding:.15rem .5rem;border-radius:4px;border:1px solid;}
-    .bloom-chip.Remember{background:#fef5e7;color:#ca6f1e;border-color:#f0b27a;}
-    .bloom-chip.Understand{background:#eaf4fb;color:#1a5276;border-color:#85c1e9;}
-    .bloom-chip.Apply{background:#e9f7ef;color:#1d6a39;border-color:#7dcea0;}
-    .bloom-chip.Analyze{background:#f4ecf7;color:#6c3483;border-color:#c39bd3;}
-    .bloom-chip.Evaluate{background:#fdf2f8;color:#a93226;border-color:#f1948a;}
-    .bloom-chip.Create{background:#fdfefe;color:#148f77;border-color:#76d7c4;}
-    .card-footer{padding:.7rem 1.4rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;background:#fafcfe;}
-    .open-btn{font-size:.82rem;font-weight:600;color:var(--sky);display:flex;align-items:center;gap:.3rem;}
-    .open-btn::after{content:'→';transition:transform .15s;}
-    .quiz-card:hover .open-btn::after{transform:translateX(4px);}
-    .empty-state{text-align:center;padding:5rem 2rem;color:var(--muted);grid-column:1/-1;}
-    .empty-state .empty-icon{font-size:4rem;margin-bottom:1rem;opacity:.4;}
-    .empty-state p{font-size:1.1rem;}
-    footer{text-align:center;padding:2rem 1rem;font-size:.82rem;color:var(--muted);border-top:1px solid var(--border);background:var(--card);}
-    @keyframes cardIn{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
-    .quiz-card{animation:cardIn .3s ease both;}
-    @media(max-width:640px){.hero{padding:2.5rem 1rem 4rem;}.filter-bar{position:static;}.quiz-grid{grid-template-columns:1fr;}.hero-stats{gap:1rem;padding:.6rem 1.2rem;}}
+    :root{--primary:#1a5276;--accent:#2e86c1;--bg:#f4f6f9;--exp:#1e8449;}
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:"Microsoft JhengHei",sans-serif;background:var(--bg);color:#2c3e50;}
+    .header{background:linear-gradient(135deg,var(--primary),var(--accent));color:white;padding:2rem;text-align:center;}
+    .header h1{font-size:1.8rem;}.header p{margin-top:0.5rem;opacity:0.85;}
+    .container{max-width:960px;margin:0 auto;padding:2rem 1.5rem;}
+    .filter-bar{display:flex;gap:1rem;margin-bottom:2rem;flex-wrap:wrap;align-items:center;}
+    .filter-bar select,.filter-bar input{padding:0.5rem 1rem;border:1px solid #ccc;border-radius:6px;font-size:0.95rem;}
+    .quiz-grid{display:grid;gap:1.2rem;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));}
+    .quiz-card{background:white;border-radius:10px;padding:1.2rem 1.5rem;
+      box-shadow:0 2px 8px rgba(0,0,0,0.07);border-left:4px solid var(--accent);
+      text-decoration:none;color:inherit;display:block;transition:transform 0.15s;}
+    .quiz-card.has-exp{border-left-color:var(--exp);}
+    .quiz-card:hover{transform:translateY(-2px);}
+    .unit-badge{display:inline-block;background:var(--accent);color:white;
+      font-size:0.75rem;padding:0.2rem 0.6rem;border-radius:10px;margin-bottom:0.5rem;}
+    .exp-badge{display:inline-block;background:var(--exp);color:white;
+      font-size:0.7rem;padding:0.15rem 0.5rem;border-radius:10px;margin-left:0.3rem;}
+    .quiz-card h3{font-size:1rem;margin-bottom:0.4rem;}
+    .quiz-card .meta{font-size:0.8rem;color:#888;}
+    .no-result{text-align:center;color:#aaa;padding:3rem 0;}
   </style>
 </head>
 <body>
-<header class="hero">
-  <div class="hero-icon">⚛️</div>
-  <h1>桃園觀音高中　物理科線上題庫</h1>
-  <p>素養導向 ✦ 動態動畫 ✦ 互動模擬實驗　｜　依 Bloom 分類設計</p>
-  <div class="hero-stats">
-    <span><strong id="stat-total">0</strong> 份試卷</span>
-    <span><strong id="stat-units">0</strong> 個單元</span>
-    <span><strong id="stat-sim">0</strong> 份含模擬器</span>
-  </div>
-</header>
-<svg class="wave-divider" viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M0,30 C360,65 720,0 1080,40 C1260,60 1380,20 1440,30 L1440,60 L0,60 Z"/>
-</svg>
+<div class="header">
+  <h1>🔬 桃園觀音高中物理科 線上題庫</h1>
+  <p>素養導向試題 ／ 含互動實驗 ／ 依單元篩選</p>
+</div>
 <div class="container">
   <div class="filter-bar">
-    <div class="search-wrap"><input type="text" id="searchInput" placeholder="搜尋標題、單元關鍵字…" oninput="render()"></div>
-    <div class="chip-group" id="unitChips"><span class="chip active" data-unit="" onclick="setUnit(this)">全部</span></div>
-    <select class="sort-select" id="sortSelect" onchange="render()"><option value="date-desc">最新優先</option><option value="date-asc">最舊優先</option><option value="unit">依單元</option></select>
-    <span class="result-count" id="resultCount"></span>
+    <label>篩選單元：</label>
+    <select id="unitFilter" onchange="filterQuizzes()"><option value="">全部單元</option></select>
+    <select id="expFilter" onchange="filterQuizzes()">
+      <option value="">全部題型</option><option value="exp">含互動實驗</option>
+    </select>
+    <input type="text" id="searchInput" placeholder="搜尋關鍵字..." oninput="filterQuizzes()" style="flex:1;min-width:150px">
+    <span id="countDisplay" style="color:#888;font-size:0.9rem"></span>
   </div>
-  <div class="quiz-grid" id="quizGrid">
-    <div class="empty-state"><div class="empty-icon">📭</div><p>還沒有題目，快來出第一份吧！</p></div>
-  </div>
+  <div class="quiz-grid" id="quizGrid"></div>
+  <div class="no-result" id="noResult" style="display:none">找不到符合的題目</div>
 </div>
-<footer>桃園觀音高中物理科 ／ 本題庫由 AI 輔助生成，教師審閱後使用 ／ <a href="https://github.com/guidephy/Test" target="_blank" style="color:var(--sky)">GitHub Repo</a></footer>
 <script>
-const UNIT_EMOJI={'力學':'⚙️','電場':'⚡','電磁學':'🧲','光學':'🔭','波動':'〰️','熱學':'🌡️','靜力學':'🏗️','量子':'🔬'};
-let activeUnit='';
-// <!-- QUIZ_DATA_START -->
+<!-- QUIZ_DATA_START -->
 const QUIZ_LIST = [
   {
-    "unit": "電場",
-    "title": "靜電集塵與電場的科技應用",
-    "date": "20260323",
-    "url": "https://guidephy.github.io/Test/quizzes/電場/電場_20260323.html",
+    "unit": "電磁感應",
+    "title": "充電不插線！電動車無線充電背後的法拉第感應原理",
+    "date": "20260404",
+    "url": "quizzes/em_induction/em_induction_20260404.html",
+    "has_experiment": true,
     "bloom_levels": [
       "Remember",
       "Understand",
       "Apply",
       "Analyze",
-      "Evaluate"
+      "Evaluate",
+      "Create"
     ],
-    "question_count": 12,
-    "has_simulation": false,
-    "has_animation": true
+    "question_count": 10
   },
   {
-    "unit_id": "matter",
-    "title": "宇宙最強的膠水——強力與夸克膠子漿",
-    "date": "20260324",
-    "url": "https://guidephy.github.io/Test/quizzes/matter/matter_20260324.html",
+    "unit": "運動學",
+    "title": "AI追蹤科技揭開百米衝刺的物理秘密",
+    "date": "20260405",
+    "url": "quizzes/kinematics/kinematics_20260405.html",
+    "has_experiment": true,
     "bloom_levels": [
       "Remember",
       "Understand",
       "Apply",
-      "Analyze"
+      "Analyze",
+      "Evaluate",
+      "Create"
     ],
-    "question_count": 12,
-    "has_simulation": true,
-    "has_animation": true
+    "question_count": 10
+  },
+  {
+    "unit": "直線運動",
+    "title": "台灣高鐵的速度密碼——直線運動基本觀念",
+    "date": "20260405",
+    "url": "quizzes/linear_motion/linear_motion_20260405.html",
+    "has_experiment": true,
+    "bloom_levels": [
+      "Remember",
+      "Understand",
+      "Apply",
+      "Analyze",
+      "Evaluate",
+      "Create"
+    ],
+    "question_count": 10
+  },
+  {
+    "unit": "牛頓運動定律",
+    "title": "星艦升空背後的三大定律——牛頓運動定律",
+    "date": "20260405",
+    "url": "quizzes/newton_laws/newton_laws_20260405.html",
+    "has_experiment": true,
+    "bloom_levels": [
+      "Remember",
+      "Understand",
+      "Apply",
+      "Analyze",
+      "Evaluate",
+      "Create"
+    ],
+    "question_count": 10
+  },
+  {
+    "unit": "克卜勒行星運動定律",
+    "title": "韋伯望遠鏡直接拍到系外行星——克卜勒三大定律",
+    "date": "20260405",
+    "url": "quizzes/kepler_laws/kepler_laws_20260405.html",
+    "has_experiment": true,
+    "bloom_levels": [
+      "Remember",
+      "Understand",
+      "Apply",
+      "Analyze",
+      "Evaluate",
+      "Create"
+    ],
+    "question_count": 10
   }
 ];
-// <!-- QUIZ_DATA_END -->
-function init(){
-  document.getElementById('stat-total').textContent=QUIZ_LIST.length;
-  const units=[...new Set(QUIZ_LIST.map(q=>q.unit))];
-  document.getElementById('stat-units').textContent=units.length;
-  document.getElementById('stat-sim').textContent=QUIZ_LIST.filter(q=>q.has_simulation).length;
-  const cg=document.getElementById('unitChips');
-  units.forEach(u=>{const c=document.createElement('span');c.className='chip';c.dataset.unit=u;c.textContent=(UNIT_EMOJI[u]||'📋')+' '+u;c.onclick=()=>setUnit(c);cg.appendChild(c);});
-  render();
+<!-- QUIZ_DATA_END -->
+function initFilter(){
+  const units=[...new Set(QUIZ_LIST.map(q=>q.unit))].sort();
+  const sel=document.getElementById("unitFilter");
+  units.forEach(u=>{const o=document.createElement("option");o.value=u;o.textContent=u;sel.appendChild(o);});
 }
-function setUnit(el){document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));el.classList.add('active');activeUnit=el.dataset.unit;render();}
-function render(){
-  const kw=document.getElementById('searchInput').value.toLowerCase().trim();
-  const sort=document.getElementById('sortSelect').value;
-  let list=QUIZ_LIST.filter(q=>{const mU=!activeUnit||q.unit===activeUnit;const mK=!kw||q.title.toLowerCase().includes(kw)||q.unit.toLowerCase().includes(kw);return mU&&mK;});
-  if(sort==='date-desc')list.sort((a,b)=>b.date.localeCompare(a.date));
-  else if(sort==='date-asc')list.sort((a,b)=>a.date.localeCompare(b.date));
-  else list.sort((a,b)=>a.unit.localeCompare(b.unit));
-  document.getElementById('resultCount').textContent='共 '+list.length+' 份';
-  const grid=document.getElementById('quizGrid');
-  if(!list.length){grid.innerHTML='<div class="empty-state"><div class="empty-icon">🔍</div><p>找不到符合的題目</p></div>';return;}
-  grid.innerHTML=list.map((q,i)=>{
-    const yyyy=q.date.slice(0,4),mm=q.date.slice(4,6),dd=q.date.slice(6,8);
-    const emoji=UNIT_EMOJI[q.unit]||'📋';
-    const bc=(q.bloom_levels||[]).map(b=>'<span class="bloom-chip '+b+'">'+b+'</span>').join('');
-    return '<a class="quiz-card" href="'+q.url+'" target="_blank" data-unit="'+q.unit+'" style="animation-delay:'+i*.04+'s"><div class="card-stripe"></div><div class="card-body"><div class="card-top"><span class="unit-badge">'+emoji+' '+q.unit+'</span>'+(q.has_simulation?'<span class="sim-badge">🔬 模擬器</span>':'')+(q.has_animation?'<span class="anim-badge">✨ 動畫</span>':'')+'</div><div class="card-title">'+q.title+'</div><div class="card-meta"><span>📅 '+yyyy+'/'+mm+'/'+dd+'</span><span>📝 '+q.question_count+' 題</span></div><div class="bloom-row">'+bc+'</div></div><div class="card-footer"><span style="font-size:.8rem;color:var(--muted)">點擊開啟試卷</span><span class="open-btn">開啟</span></div></a>';
-  }).join('');
+function filterQuizzes(){
+  const unit=document.getElementById("unitFilter").value;
+  const expOnly=document.getElementById("expFilter").value==="exp";
+  const kw=document.getElementById("searchInput").value.toLowerCase();
+  const filtered=QUIZ_LIST.filter(q=>
+    (!unit||q.unit===unit)&&(!expOnly||q.has_experiment)&&
+    (!kw||q.title.toLowerCase().includes(kw)||q.unit.toLowerCase().includes(kw))
+  ).sort((a,b)=>b.date.localeCompare(a.date));
+  const grid=document.getElementById("quizGrid"),noResult=document.getElementById("noResult");
+  document.getElementById("countDisplay").textContent="共 "+filtered.length+" 份";
+  if(!filtered.length){grid.innerHTML="";noResult.style.display="block";return;}
+  noResult.style.display="none";
+  grid.innerHTML=filtered.map(q=>
+    '<a class="quiz-card '+(q.has_experiment?"has-exp":"")+'" href="'+q.url+'" target="_blank">'+
+    '<div><span class="unit-badge">'+q.unit+'</span>'+(q.has_experiment?'<span class="exp-badge">🧪 互動實驗</span>':'')+
+    '</div><h3>'+q.title+'</h3><div class="meta">'+
+    q.date.slice(0,4)+'/'+q.date.slice(4,6)+'/'+q.date.slice(6,8)+' ／ '+q.question_count+' 題</div></a>'
+  ).join("");
 }
-init();
-</script>
-</body>
-</html>
+initFilter();filterQuizzes();
+</script></body></html>
